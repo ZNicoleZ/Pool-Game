@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<head>
+    <title>Pool</title> 
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+</head>
+<body id="body">
+    <section class="sticky">
+    <div class="bubbles">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        
+    </div>
+    </section>
+    <button id="pause" onclick="pause()">Pause</button>
+    <div class="gameBoard">
+        <canvas id="gameCanvas"></canvas>
+    </div>
+    <div class="score">
+        <h1 id="player1"></h1>
+        <div class="current">
+            <h2 id="currentOrWinner">Current player is</h2>
+            <h1 id="currentPlayer"></h1>
+        </div>
+        <h1 id="player2"></h1>
+    </div>
+    <div id="instructions">
+        <div id="gameHead">
+            <p id="letsplay">Lets Play Some</p>
+            <p id="Pool">Pool!</p>
+        </div>
+        <button id="startGame" onclick="startGame()">Start Game</button>
+    </div>
+
+    <script src="confetti.js"></script>
+    <script src="utils.js"></script>
+    <script src="vector2d.js"></script>
+    <script src="stick.js"></script>
+    <script src="table.js"></script>
+    <script src="ball.js"></script>
+    <script src="game.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

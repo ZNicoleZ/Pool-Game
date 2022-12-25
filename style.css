@@ -1,0 +1,260 @@
+body{
+  background: linear-gradient(to right, #8e2de2, #4a00e0);     
+  display:flex;
+  justify-content:center;
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+
+}
+#instructions{
+  background: linear-gradient(to right, #ff8419, #f90985);
+  background-image: url("images/green_texture2.jpg");
+  left: 0;
+  top: 0;
+  display:flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position:absolute;
+  z-index: 300;
+  transition: .5s;
+  box-shadow: inset 0 0 200rem #000000;
+}
+.switch #instructions{
+  transform: translateY(-100%) rotate(0deg) scale(1);
+}
+
+#startGame{
+  color: #07421d;
+  background-color: #ffffff;
+  box-shadow: 0 0.3rem 0.4rem 0 rgba(0,0,0,0.4);
+  border: transparent;
+  text-align: center;
+  border-radius: 40px;
+  padding: 10px 40px 15px 40px;
+  font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: xx-large;
+  z-index: 200;
+  transition: all 0.2s ease-out;
+  cursor: pointer;
+}
+#startGame:hover{
+  box-shadow: 0 0.8rem 0.8rem 0 rgba(0,0,0,0.5), 0 0.8rem 1.2rem 0 rgba(0,0,0,0.19);
+  transition: all 0.35s ease;
+  color: #fba12c;
+}
+
+.gameBoard{
+  position:absolute;
+  z-index: 1;
+}
+
+.score{
+  display:grid;
+  grid-auto-flow: column;
+  grid-column-gap: 10px;
+  position:relative;
+  z-index: 100;
+}
+#confetti-canvas{
+  position:absolute;
+  z-index: 9999999999;
+}
+
+#player1{
+  color: white;
+  background-color: red;
+  border-radius: 0px 0px 15px 15px;
+  padding: 10px 20px 10px 20px;
+  font-family: 'Segoe UI';
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+#player2{
+  color: white;
+  background-color: goldenrod;
+  border-radius: 0px 0px 15px 15px;
+  padding: 10px 20px 10px 20px;
+  font-family: 'Segoe UI';
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.current{
+  background-color: white;
+  text-align: center;
+  border-radius: 0px 0px 15px 15px;
+  padding: 5px 30px 5px 30px;
+  font-family: 'Segoe UI';
+  font-size: small;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+#currentPlayer{
+  font-size:x-large;
+  margin: 0;
+
+}
+h1{
+  margin: 0;
+
+}
+h2{
+  margin: 0;
+
+}
+#gameHead{
+  transform: rotate(-7deg) translateY(-3rem);
+}
+#letsplay{
+  color: goldenrod;
+  text-shadow: 0 0.3rem 1rem #000000;
+  border: transparent;
+  text-align: center;
+  padding: 10px 40px 15px 40px;
+  font-family: 'Dancing Script', cursive;
+  font-weight: 700;
+  font-size: 7rem;
+  z-index: 200;
+  margin: 0;
+  transform: translateY(6rem);
+}
+#Pool{
+  color: goldenrod;
+  text-shadow: 0 0.3rem 1rem #000000;
+  border: transparent;
+  text-align: center;
+  padding: 10px 40px 15px 40px;
+  font-family: 'Dancing Script', cursive;
+  font-weight: 700;
+  font-size: 18rem;
+  z-index: 200;
+  margin: 0;
+}
+#pause{
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  color: #8e2de2;
+  background-color: #ffffff;
+  box-shadow: 0 0.1rem 0.2rem 0 rgba(0,0,0,0.4);
+  border: transparent;
+  text-align: center;
+  border-radius: 25px;
+  padding: 5px 30px 5px 30px;
+  font-family: 'Segoe UI';
+  font-weight: 600;
+  font-size: large;
+  z-index: 200;
+  transition: all 0.2s ease-out;
+  cursor: pointer;
+}
+#pause:hover{
+  color: #ff064d;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  transition: all 0.35s ease;
+}
+
+.bubbles{
+  position:absolute;
+  width:100%;
+  height: 100%;
+  z-index:-1;
+  overflow:hidden;
+  top:0;
+  left:0;
+}
+.bubble{
+  position: absolute;
+  bottom:-100px;
+  width:40px;
+  height: 40px;
+  background:#f1f1f1;
+  border-radius:50%;
+  opacity:0.2;
+  animation: rise 10s infinite ease-in;
+}
+.bubble:nth-child(1){
+  width:40px;
+  height:40px;
+  left:10%;
+  animation-duration:8s;
+}
+.bubble:nth-child(2){
+  width:20px;
+  height:20px;
+  left:20%;
+  animation-duration:5s;
+  animation-delay:1s;
+}
+.bubble:nth-child(3){
+  width:50px;
+  height:50px;
+  left:35%;
+  animation-duration:7s;
+  animation-delay:2s;
+}
+.bubble:nth-child(4){
+  width:80px;
+  height:80px;
+  left:50%;
+  animation-duration:11s;
+  animation-delay:0s;
+}
+.bubble:nth-child(5){
+  width:35px;
+  height:35px;
+  left:55%;
+  animation-duration:6s;
+  animation-delay:1s;
+}
+.bubble:nth-child(6){
+  width:45px;
+  height:45px;
+  left:65%;
+  animation-duration:8s;
+  animation-delay:3s;
+}
+.bubble:nth-child(7){
+  width:90px;
+  height:90px;
+  left:70%;
+  animation-duration:12s;
+  animation-delay:2s;
+}
+.bubble:nth-child(8){
+  width:25px;
+  height:25px;
+  left:80%;
+  animation-duration:6s;
+  animation-delay:2s;
+}
+.bubble:nth-child(9){
+  width:15px;
+  height:15px;
+  left:70%;
+  animation-duration:5s;
+  animation-delay:1s;
+}
+.bubble:nth-child(10){
+  width:90px;
+  height:90px;
+  left:25%;
+  animation-duration:10s;
+  animation-delay:4s;
+}
+@keyframes rise{
+  0%{
+    bottom:-100px;
+    transform:translateX(0);
+  }
+  50%{
+    transform:translate(100px);
+  }
+  100%{
+    bottom:1080px;
+    transform:translateX(-200px);
+  }
+}
