@@ -12,37 +12,31 @@ let makeConfetti = true;    // start confetti
 let start = false;          // game has started
 let pauseGame = false;      // the game is paused
 
-// colors
-const WHITE = 3;
-const BLACK = 4;
-const RED = 1;
-const YELLOW = 2;
-
 const gameCtx = gameCanvas.getContext("2d");
-const ballRadius=25;
-const table=new Table(gameCanvas.width/2,gameCanvas.height/2,1200, 700);
-const balls=[   new Ball(new Vector2D(table.x - table.innerWidth*0.25,table.y),WHITE),
-                new Ball(new Vector2D(1090,413),BLACK),
-                // yellows
-                new Ball(new Vector2D(1056,433),YELLOW),//3
-                new Ball(new Vector2D(1090,374),YELLOW),//4
-                new Ball(new Vector2D(1126,393),YELLOW),//8
-                new Ball(new Vector2D(1126,472),YELLOW),//10;
-                new Ball(new Vector2D(1162,335),YELLOW),//11
-                new Ball(new Vector2D(1162,374),YELLOW),//12
-                new Ball(new Vector2D(1162,452),YELLOW),//14
-                // reds
-                new Ball(new Vector2D(1022,413),RED),//1
-                new Ball(new Vector2D(1056,393),RED),//2
-                new Ball(new Vector2D(1090,452),RED),//6
-                new Ball(new Vector2D(1126,354),RED),//7
-                new Ball(new Vector2D(1126,433),RED),//9
-                new Ball(new Vector2D(1162,413),RED),//13
-                new Ball(new Vector2D(1162,491),RED)//15
-            ];
-const stick=new Stick(new Vector2D(346,400), balls[0]);
+// const ballRadius=25;
+// const table=new Table(gameCanvas.width/2,gameCanvas.height/2,1200, 700);
+// const balls=[   new Ball(new Vector2D(table.x - table.innerWidth*0.25,table.y),WHITE),
+//                 new Ball(new Vector2D(1090,413),BLACK),
+//                 // yellows
+//                 new Ball(new Vector2D(1056,433),YELLOW),//3
+//                 new Ball(new Vector2D(1090,374),YELLOW),//4
+//                 new Ball(new Vector2D(1126,393),YELLOW),//8
+//                 new Ball(new Vector2D(1126,472),YELLOW),//10;
+//                 new Ball(new Vector2D(1162,335),YELLOW),//11
+//                 new Ball(new Vector2D(1162,374),YELLOW),//12
+//                 new Ball(new Vector2D(1162,452),YELLOW),//14
+//                 // reds
+//                 new Ball(new Vector2D(1022,413),RED),//1
+//                 new Ball(new Vector2D(1056,393),RED),//2
+//                 new Ball(new Vector2D(1090,452),RED),//6
+//                 new Ball(new Vector2D(1126,354),RED),//7
+//                 new Ball(new Vector2D(1126,433),RED),//9
+//                 new Ball(new Vector2D(1162,413),RED),//13
+//                 new Ball(new Vector2D(1162,491),RED)//15
+//             ];
+// const stick=new Stick(new Vector2D(346,400), balls[0]);
 
-const game = new Game(table, balls, stick, gameCanvas.width, gameCanvas.height);
+const game = new Game(gameCanvas.width, gameCanvas.height);
 
 
 
@@ -53,11 +47,10 @@ function updateMousekMove(e){
 
     if(game.repositionWhiteBall){
         game.whiteBall.position.x = e.clientX - rect.left;
-        //game.whiteBall.position.x = table.x - table.innerWidth*0.25;
         game.whiteBall.position.y = e.clientY - rect.top;
     }
     else{
-        stick.update(e.clientX - rect.left, e.clientY - rect.top, balls[0]);
+        game.stick.update(e.clientX - rect.left, e.clientY - rect.top, game.whiteBall);
     }
         
 }
@@ -71,7 +64,7 @@ function onClick(){
             }
         }
         else{
-            stick.shoot();
+            game.stick.shoot();
             game.isShot = true;
         }
     }
@@ -125,6 +118,13 @@ function startGame(){
     }else{
         btn.innerHTML = "Start Game";
         elemnt.classList.toggle("switch");
+        
+        if(game.status != 0){
+            makeConfetti = true;
+            start = false;       
+            pauseGame = false;      
+            game.resetGame();
+        }
         setTimeout(() => {
         start = true;
         }, 1000);

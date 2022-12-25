@@ -1,9 +1,35 @@
+// colors
+const WHITE = 3;
+const BLACK = 4;
+const RED = 1;
+const YELLOW = 2;
+
 class Game{
-    constructor(table, balls, stick, width, height){
-        this.table = table;
-        this.stick = stick;
-        this.balls = balls;
+    constructor(width, height){
+        this.cnvsW = width;
+        this.cnvsH = height;
+        this.table=new Table(this.cnvsW/2, this.cnvsH/2,1200, 700);
+        this.balls=[   new Ball(new Vector2D(this.table.x - this.table.innerWidth*0.25,this.table.y),WHITE),
+                        new Ball(new Vector2D(1090,413),BLACK),
+                        // yellows
+                        new Ball(new Vector2D(1056,433),YELLOW),//3
+                        new Ball(new Vector2D(1090,374),YELLOW),//4
+                        new Ball(new Vector2D(1126,393),YELLOW),//8
+                        new Ball(new Vector2D(1126,472),YELLOW),//10;
+                        new Ball(new Vector2D(1162,335),YELLOW),//11
+                        new Ball(new Vector2D(1162,374),YELLOW),//12
+                        new Ball(new Vector2D(1162,452),YELLOW),//14
+                        // reds
+                        new Ball(new Vector2D(1022,413),RED),//1
+                        new Ball(new Vector2D(1056,393),RED),//2
+                        new Ball(new Vector2D(1090,452),RED),//6
+                        new Ball(new Vector2D(1126,354),RED),//7
+                        new Ball(new Vector2D(1126,433),RED),//9
+                        new Ball(new Vector2D(1162,413),RED),//13
+                        new Ball(new Vector2D(1162,491),RED)//15
+                    ];
         this.whiteBall = this.balls[0];
+        this.stick=new Stick(new Vector2D(346,400), this.whiteBall);
 
         this.borders = this.table.borders;
 
@@ -19,9 +45,6 @@ class Game{
         this.firstValidHit = null;
 
         this.repositionWhiteBall = false;
-
-        this.cnvsW = width;
-        this.cnvsH = height;
     }
 
     update(){
@@ -201,6 +224,48 @@ class Game{
         }
 
         return false;
+    }
+
+    resetGame(){
+
+        this.table=new Table(this.cnvsW/2, this.cnvsH/2,1200, 700);
+        this.balls=[   new Ball(new Vector2D(this.table.x - this.table.innerWidth*0.25,this.table.y),WHITE),
+                        new Ball(new Vector2D(1090,413),BLACK),
+                        // yellows
+                        new Ball(new Vector2D(1056,433),YELLOW),//3
+                        new Ball(new Vector2D(1090,374),YELLOW),//4
+                        new Ball(new Vector2D(1126,393),YELLOW),//8
+                        new Ball(new Vector2D(1126,472),YELLOW),//10;
+                        new Ball(new Vector2D(1162,335),YELLOW),//11
+                        new Ball(new Vector2D(1162,374),YELLOW),//12
+                        new Ball(new Vector2D(1162,452),YELLOW),//14
+                        // reds
+                        new Ball(new Vector2D(1022,413),RED),//1
+                        new Ball(new Vector2D(1056,393),RED),//2
+                        new Ball(new Vector2D(1090,452),RED),//6
+                        new Ball(new Vector2D(1126,354),RED),//7
+                        new Ball(new Vector2D(1126,433),RED),//9
+                        new Ball(new Vector2D(1162,413),RED),//13
+                        new Ball(new Vector2D(1162,491),RED)//15
+                    ];
+        this.whiteBall = this.balls[0];
+        this.stick=new Stick(new Vector2D(346,400), this.whiteBall);
+
+        this.borders = this.table.borders;
+
+        this.score_player1=0;   // red
+        this.score_player2=0;   // yellow
+
+        this.currentTurn = 1;   // red player begins game
+        this.status = 0;        // 0 - active, 1 - red won, 2 - yellow won, 3 - tie (manual exit usually)
+        this.switchTurns = true;
+        this.turnOver = false;
+        this.isShot = false;
+        this.hitRes = null;
+        this.firstValidHit = null;
+
+        this.repositionWhiteBall = false;
+
     }
 
     draw(ctx){
