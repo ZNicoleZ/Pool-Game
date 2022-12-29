@@ -32,12 +32,52 @@ class Table{
 
     }
 
+    resize(newX, newY, newWidth, newHeight){
+        this.x=newX;
+        this.y=newY;
+        this.width=newWidth;
+        this.height=newHeight;
+
+        this.borderWidth=newHeight/20;
+        this.innerWidth=newWidth-2*this.borderWidth;
+        this.innerHeight=newHeight-2*this.borderWidth;
+
+        this.borders = {
+            TOP_Y: this.y-this.innerHeight/2,
+            RIGHT_X: this.x+this.innerWidth/2,
+            BOTTOM_Y: this.y+this.innerHeight/2,
+            LEFT_X: this.x-this.innerWidth/2
+        }
+
+        this.holeRad=this.borderWidth*0.8;
+        this.holes = [  new Vector2D(this.borders.LEFT_X,this.borders.TOP_Y),
+                        new Vector2D(this.borders.LEFT_X+this.innerWidth/2,this.borders.TOP_Y),
+                        new Vector2D(this.borders.LEFT_X+this.innerWidth,this.borders.TOP_Y),
+                        new Vector2D(this.borders.LEFT_X,this.borders.BOTTOM_Y),
+                        new Vector2D(this.borders.LEFT_X+this.innerWidth/2,this.borders.BOTTOM_Y),
+                        new Vector2D(this.borders.LEFT_X+this.innerWidth,this.borders.BOTTOM_Y)        
+                        ];
+    }
+
+    drawRoundRect(ctx, xx,yy, ww,hh, rad, fill, stroke){
+        
+        ctx.beginPath();
+        ctx.moveTo(xx+rad, yy);
+        ctx.arcTo(xx+ww, yy,    xx+ww, yy+hh, rad);
+        ctx.arcTo(xx+ww, yy+hh, xx,    yy+hh, rad);
+        ctx.arcTo(xx,    yy+hh, xx,    yy,    rad);
+        ctx.arcTo(xx,    yy,    xx+ww, yy,    rad);
+        if (stroke) ctx.stroke();
+        if (fill)   ctx.fill();
+
+    }
+
     draw(ctx){
         // brown frame
         ctx.save();
         
-        ctx.beginPath();
-        ctx.roundRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height, 15);
+        // ctx.roundRect(this.x-this.width/2, this.y-this.height/2, this.width, this.height, 15); // NOT SUPPORTED ON FIREFOX
+        this.drawRoundRect(ctx, this.x-this.width/2, this.y-this.height/2, this.width, this.height, 15)
         ctx.shadowColor = "#311432";
         ctx.shadowBlur = 30;
         ctx.shadowOffsetX = 0;
@@ -98,5 +138,12 @@ class Table{
             ctx.fillStyle="#222021";
             ctx.fill();
         }
+
+        // res stroke
+        // ctx.beginPath();
+        // ctx.rect(this.borders.LEFT_X, this.borders.TOP_Y, this.innerWidth, this.innerHeight);
+        // ctx.strokeStyle="red";
+        // ctx.stroke();
+        // ctx.closePath();
     }
 }
