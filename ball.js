@@ -1,14 +1,15 @@
 const BALL_ORIGIN = new Vector2D(25,25);
 const SIZE = 25;
 class Ball{
-    constructor(position,color){
+    constructor(position, color, radius){
         this.position = position;
         this.velocity = new Vector2D();
         this.isMoving = false;
         this.inHole = false;
         this.isVisible = true;
-        this.radius = 19;
+        this.radius = radius;
         this.diameter = this.radius*2;
+        this.ballOrigin = new Vector2D(radius*1.3,radius*1.3);
         this.opacity = 100;
         this.color = color;
 
@@ -51,11 +52,7 @@ class Ball{
     }
 
     update(){
-        // this.#move();
-        // if(this.velocity==0){
-        //     this.isSelected=false;
-        // }
-
+        
         this.position.addTo(this.velocity.mult(1/177));
         this.velocity = this.velocity.mult(0.97);
 
@@ -80,8 +77,6 @@ class Ball{
     checkInHole(holePosition, holeRadius, currentPlayer){
         let dist = this.position.subtract(holePosition).length();
         if(dist <= holeRadius){
-            // this.isVisible = false;
-            // console.log("BALL IN HOLE!");
             this.inHole = true;
             this.position.x = holePosition.x;
             this.position.y = holePosition.y;
@@ -123,7 +118,6 @@ class Ball{
 
         // find minimum translation distance
         const mtd = n.mult((this.diameter - dist)/dist);
-        //const h_mtd = {x: mtd.x*(1/2), y:mtd.y*(1/2)};
 
         // push-pull balls apart
         this.position = this.position.add(mtd.mult(0.5));
@@ -217,20 +211,30 @@ class Ball{
         this.isMoving = true;
     }
 
+    resize(newRadius, newX, newY){
+        this.position.x = newX;
+        this.position.y = newY;
+        this.radius = newRadius;
+        this.diameter = this.radius*2;
+        this.ballOrigin = new Vector2D(newRadius*1.3,newRadius*1.3);
+    }
+
     draw(ctx){
         
         //ctx.drawImage(this.img, this.x - this.radius,this.y - this.radius, this.diameter, this.diameter)
         ctx.save();
         ctx.translate(this.position.x, this.position.y);
         ctx.globalAlpha = this.opacity/100;
-        //ctx.scale(this.opacity/100, this.opacity/100);
-        ctx.drawImage(this.img, -BALL_ORIGIN.x, -BALL_ORIGIN.y);
+        ctx.translate(-this.ballOrigin.x, -this.ballOrigin.y);
+        ctx.scale(this.radius*0.054, this.radius*0.054);
+        ctx.drawImage(this.img,0,0);
+        // ctx.drawImage(this.img, -this.ballOrigin.x, -this.ballOrigin.y);
         ctx.restore();
 
         // red stroke
         // ctx.beginPath();
         // ctx.arc(this.position.x-1, this.position.y, this.radius, 0, 2*Math.PI);
-        // ctx.strokeStyle="red";
+        // ctx.strokeStyle="green";
         // ctx.stroke();
 
         // ctx.save();

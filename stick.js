@@ -4,9 +4,11 @@ const MAX_POWER = 250;
 
 class Stick{
     
-    constructor(position, toShoot){
+    constructor(position, toShoot, stickOrigin, stickShootOrigin){
         this.position = position;
-        this.origin = STICK_ORIGIN.copy();
+        this.stickOrigin = stickOrigin;
+        this.stickShootOrigin = stickShootOrigin;
+        this.origin = this.stickOrigin.copy();
         this.angle = 0;
         this.power = 0;
         this.toShoot = toShoot;
@@ -34,13 +36,13 @@ class Stick{
         if(!this.toShoot.isMoving){
             this.toShoot.hit(this.power*30, this.angle);
             this.power = 0;
-            this.origin = STICK_SHOOT_ORIGIN.copy();
+            this.origin = this.stickShootOrigin.copy();
         }
     }
 
     reposition(position){
         this.position = position;
-        this.origin = STICK_ORIGIN.copy();
+        this.origin = this.stickOrigin.copy();
     }
 
     draw(ctx){

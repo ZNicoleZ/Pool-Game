@@ -8,28 +8,29 @@ class Game{
     constructor(width, height){
         this.cnvsW = width;
         this.cnvsH = height;
-        this.table=new Table(this.cnvsW/2, this.cnvsH/2,1200, 700);
-        this.balls=[   new Ball(new Vector2D(this.table.x - this.table.innerWidth*0.25,this.table.y),WHITE),
-                        new Ball(new Vector2D(1090,413),BLACK),
+        this.ballRadius = height*0.025;
+        this.table=new Table(this.cnvsW/2, this.cnvsH/2, this.cnvsH*1.4, this.cnvsH*0.8);
+        this.balls=[   new Ball(new Vector2D(this.table.x - this.table.innerWidth*0.25,this.table.y),WHITE,this.ballRadius),
+                        new Ball(new Vector2D(width*0.5+this.ballRadius*13.2,height*0.5),BLACK,this.ballRadius),
                         // yellows
-                        new Ball(new Vector2D(1056,433),YELLOW),//3
-                        new Ball(new Vector2D(1090,374),YELLOW),//4
-                        new Ball(new Vector2D(1126,393),YELLOW),//8
-                        new Ball(new Vector2D(1126,472),YELLOW),//10;
-                        new Ball(new Vector2D(1162,335),YELLOW),//11
-                        new Ball(new Vector2D(1162,374),YELLOW),//12
-                        new Ball(new Vector2D(1162,452),YELLOW),//14
+                        new Ball(new Vector2D(width*0.5+this.ballRadius*11.6,height*0.5+this.ballRadius),YELLOW,this.ballRadius),//3
+                        new Ball(new Vector2D(width*0.5+this.ballRadius*13.2,height*0.5-this.ballRadius*2),YELLOW,this.ballRadius),//4
+                        new Ball(new Vector2D(width*0.5+this.ballRadius*14.8,height*0.5-this.ballRadius),YELLOW,this.ballRadius),//8
+                        new Ball(new Vector2D(width*0.5+this.ballRadius*14.8,height*0.5+this.ballRadius*3),YELLOW,this.ballRadius),//10;
+                        new Ball(new Vector2D(width*0.5+this.ballRadius*16.4,height*0.5-this.ballRadius*2),YELLOW,this.ballRadius),//11
+                        new Ball(new Vector2D(width*0.5+this.ballRadius*16.4,height*0.5+this.ballRadius*2),YELLOW,this.ballRadius),//12
+                        new Ball(new Vector2D(width*0.5+this.ballRadius*16.4,height*0.5-this.ballRadius*4),YELLOW,this.ballRadius),//14
                         // reds
-                        new Ball(new Vector2D(1022,413),RED),//1
-                        new Ball(new Vector2D(1056,393),RED),//2
-                        new Ball(new Vector2D(1090,452),RED),//6
-                        new Ball(new Vector2D(1126,354),RED),//7
-                        new Ball(new Vector2D(1126,433),RED),//9
-                        new Ball(new Vector2D(1162,413),RED),//13
-                        new Ball(new Vector2D(1162,491),RED)//15
+                        new Ball(new Vector2D(width*0.5+this.ballRadius*10,height*0.5),RED,this.ballRadius),//1
+                        new Ball(new Vector2D(width*0.5+this.ballRadius*11.6,height*0.5-this.ballRadius),RED,this.ballRadius),//2
+                        new Ball(new Vector2D(width*0.5+this.ballRadius*13.2,height*0.5+this.ballRadius*2),RED,this.ballRadius),//6
+                        new Ball(new Vector2D(width*0.5+this.ballRadius*14.8,height*0.5+this.ballRadius),RED,this.ballRadius),//7
+                        new Ball(new Vector2D(width*0.5+this.ballRadius*14.8,height*0.5-this.ballRadius*3),RED,this.ballRadius),//9
+                        new Ball(new Vector2D(width*0.5+this.ballRadius*16.4,height*0.5),RED,this.ballRadius),//13
+                        new Ball(new Vector2D(width*0.5+this.ballRadius*16.4,height*0.5+this.ballRadius*4),RED,this.ballRadius)//15
                     ];
         this.whiteBall = this.balls[0];
-        this.stick=new Stick(new Vector2D(346,400), this.whiteBall);
+        this.stick=new Stick(new Vector2D(346,400), this.whiteBall, new Vector2D(970, 10), new Vector2D(950, 10));
 
         this.borders = this.table.borders;
 
@@ -228,29 +229,28 @@ class Game{
 
     resetGame(){
 
-        this.table=new Table(this.cnvsW/2, this.cnvsH/2,1200, 700);
-        this.balls=[   new Ball(new Vector2D(this.table.x - this.table.innerWidth*0.25,this.table.y),WHITE),
-                        new Ball(new Vector2D(1090,413),BLACK),
+        this.table=new Table(this.cnvsW/2, this.cnvsH/2, this.cnvsH*1.4, this.cnvsH*0.8);
+        this.balls=[   new Ball(new Vector2D(this.table.x - this.table.innerWidth*0.25,this.table.y),WHITE,this.ballRadius),
+                        new Ball(new Vector2D(this.cnvsW*0.5+this.ballRadius*13.2,this.cnvsH*0.5),BLACK,this.ballRadius),
                         // yellows
-                        new Ball(new Vector2D(1056,433),YELLOW),//3
-                        new Ball(new Vector2D(1090,374),YELLOW),//4
-                        new Ball(new Vector2D(1126,393),YELLOW),//8
-                        new Ball(new Vector2D(1126,472),YELLOW),//10;
-                        new Ball(new Vector2D(1162,335),YELLOW),//11
-                        new Ball(new Vector2D(1162,374),YELLOW),//12
-                        new Ball(new Vector2D(1162,452),YELLOW),//14
+                        new Ball(new Vector2D(this.cnvsW*0.5+this.ballRadius*11.6,this.cnvsH*0.5+this.ballRadius),YELLOW,this.ballRadius),//3
+                        new Ball(new Vector2D(this.cnvsW*0.5+this.ballRadius*13.2,this.cnvsH*0.5-this.ballRadius*2),YELLOW,this.ballRadius),//4
+                        new Ball(new Vector2D(this.cnvsW*0.5+this.ballRadius*14.8,this.cnvsH*0.5-this.ballRadius),YELLOW,this.ballRadius),//8
+                        new Ball(new Vector2D(this.cnvsW*0.5+this.ballRadius*14.8,this.cnvsH*0.5+this.ballRadius*3),YELLOW,this.ballRadius),//10;
+                        new Ball(new Vector2D(this.cnvsW*0.5+this.ballRadius*16.4,this.cnvsH*0.5-this.ballRadius*2),YELLOW,this.ballRadius),//11
+                        new Ball(new Vector2D(this.cnvsW*0.5+this.ballRadius*16.4,this.cnvsH*0.5+this.ballRadius*2),YELLOW,this.ballRadius),//12
+                        new Ball(new Vector2D(this.cnvsW*0.5+this.ballRadius*16.4,this.cnvsH*0.5-this.ballRadius*4),YELLOW,this.ballRadius),//14
                         // reds
-                        new Ball(new Vector2D(1022,413),RED),//1
-                        new Ball(new Vector2D(1056,393),RED),//2
-                        new Ball(new Vector2D(1090,452),RED),//6
-                        new Ball(new Vector2D(1126,354),RED),//7
-                        new Ball(new Vector2D(1126,433),RED),//9
-                        new Ball(new Vector2D(1162,413),RED),//13
-                        new Ball(new Vector2D(1162,491),RED)//15
+                        new Ball(new Vector2D(this.cnvsW*0.5+this.ballRadius*10,this.cnvsH*0.5),RED,this.ballRadius),//1
+                        new Ball(new Vector2D(this.cnvsW*0.5+this.ballRadius*11.6,this.cnvsH*0.5-this.ballRadius),RED,this.ballRadius),//2
+                        new Ball(new Vector2D(this.cnvsW*0.5+this.ballRadius*13.2,this.cnvsH*0.5+this.ballRadius*2),RED,this.ballRadius),//6
+                        new Ball(new Vector2D(this.cnvsW*0.5+this.ballRadius*14.8,this.cnvsH*0.5+this.ballRadius),RED,this.ballRadius),//7
+                        new Ball(new Vector2D(this.cnvsW*0.5+this.ballRadius*14.8,this.cnvsH*0.5-this.ballRadius*3),RED,this.ballRadius),//9
+                        new Ball(new Vector2D(this.cnvsW*0.5+this.ballRadius*16.4,this.cnvsH*0.5),RED,this.ballRadius),//13
+                        new Ball(new Vector2D(this.cnvsW*0.5+this.ballRadius*16.4,this.cnvsH*0.5+this.ballRadius*4),RED,this.ballRadius)//15
                     ];
         this.whiteBall = this.balls[0];
-        this.stick=new Stick(new Vector2D(346,400), this.whiteBall);
-
+        this.stick=new Stick(new Vector2D(346,400), this.whiteBall, new Vector2D(970, 10), new Vector2D(950, 10));
         this.borders = this.table.borders;
 
         this.score_player1=0;   // red
@@ -268,20 +268,52 @@ class Game{
 
     }
 
+    resize(newWidth, newHeight){
+        console.log("W: " + newWidth + " H: " + newHeight);
+        let tableProportionChange = newHeight/this.cnvsH;
+        let oldWidth = this.cnvsW;
+        let oldHeight = this.cnvsH;
+        this.cnvsW = newWidth;
+        this.cnvsH = newHeight;
+        this.ballRadius = newHeight*0.025;
+        this.table.resize(newWidth/2, newHeight/2, newHeight*1.4, newHeight*0.8);
+        this.borders = this.table.borders;
+
+        for(let i=0; i<this.balls.length; i++){
+            let newX = 0;
+            let newY = 0;
+
+            if(this.balls[i].position.x < oldWidth/2){
+                newX = newWidth/2 - (oldWidth/2 - this.balls[i].position.x)*tableProportionChange;                
+            } else {
+                newX = newWidth/2 + (this.balls[i].position.x - oldWidth/2)*tableProportionChange;
+            }
+
+            if(this.balls[i].position.y < oldHeight/2){
+                newY = newHeight/2 - (oldHeight/2 - this.balls[i].position.y)*tableProportionChange;                
+            } else {
+                newY = newHeight/2 + (this.balls[i].position.y - oldHeight/2)*tableProportionChange;
+            }
+
+            this.balls[i].resize(newHeight*0.025, newX, newY);
+        }
+    }
+
     draw(ctx){
 
         ctx.clearRect(0, 0, this.cnvsW, this.cnvsH);
 
         this.table.draw(ctx);
-        if(this.status==0 && !this.ballsMoving()){
-            this.stick.draw(ctx);
-        }
 
         for(let i=this.balls.length-1; i>=0; i--){
             if(this.balls[i].isVisible){
                 this.balls[i].draw(ctx);
             }
             
+        }
+        
+        if(this.status==0 && !this.ballsMoving()){
+            this.stick.draw(ctx);
         }        
     }
 

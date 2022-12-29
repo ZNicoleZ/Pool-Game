@@ -13,29 +13,6 @@ let start = false;          // game has started
 let pauseGame = false;      // the game is paused
 
 const gameCtx = gameCanvas.getContext("2d");
-// const ballRadius=25;
-// const table=new Table(gameCanvas.width/2,gameCanvas.height/2,1200, 700);
-// const balls=[   new Ball(new Vector2D(table.x - table.innerWidth*0.25,table.y),WHITE),
-//                 new Ball(new Vector2D(1090,413),BLACK),
-//                 // yellows
-//                 new Ball(new Vector2D(1056,433),YELLOW),//3
-//                 new Ball(new Vector2D(1090,374),YELLOW),//4
-//                 new Ball(new Vector2D(1126,393),YELLOW),//8
-//                 new Ball(new Vector2D(1126,472),YELLOW),//10;
-//                 new Ball(new Vector2D(1162,335),YELLOW),//11
-//                 new Ball(new Vector2D(1162,374),YELLOW),//12
-//                 new Ball(new Vector2D(1162,452),YELLOW),//14
-//                 // reds
-//                 new Ball(new Vector2D(1022,413),RED),//1
-//                 new Ball(new Vector2D(1056,393),RED),//2
-//                 new Ball(new Vector2D(1090,452),RED),//6
-//                 new Ball(new Vector2D(1126,354),RED),//7
-//                 new Ball(new Vector2D(1126,433),RED),//9
-//                 new Ball(new Vector2D(1162,413),RED),//13
-//                 new Ball(new Vector2D(1162,491),RED)//15
-//             ];
-// const stick=new Stick(new Vector2D(346,400), balls[0]);
-
 const game = new Game(gameCanvas.width, gameCanvas.height);
 
 
@@ -69,6 +46,13 @@ function onClick(){
         }
     }
     
+}
+
+function resizeGame(){
+    
+    gameCanvas.height=window.innerHeight;
+    gameCanvas.width=window.innerWidth;
+    game.resize(window.innerWidth, window.innerHeight);
 }
 
 document.addEventListener("mousemove", updateMousekMove);
