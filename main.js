@@ -108,6 +108,9 @@ function startGame(){
             start = false;       
             pauseGame = false;      
             game.resetGame();
+            currentOrWinner.innerHTML = "Current player is";
+            currentPlayer.innerHTML = game.currentTurn==1?"RED":"YELLOW";
+            currentPlayer.style.color = game.currentTurn==1?"red":"goldenrod";
         }
         setTimeout(() => {
         start = true;
